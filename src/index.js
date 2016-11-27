@@ -12,7 +12,7 @@ var Tweet = React.createClass({
         <div className="content">
           <NameWithHandle author={tweet.author}/>
           <Time time={tweet.timestamp}/>
-          <Message test={tweet.message}/>
+          <Message text={tweet.message}/>
           <div className="buttons">
             <ReplyButton/>
             <RetweetButton count={tweet.retweets}/>
@@ -84,8 +84,7 @@ var RetweetButton = React.createClass({
           {this.props.count}
         </span>
       );
-    }
-    else {
+    } else {
       return null;
     }
   },
@@ -103,10 +102,11 @@ var LikeButton = React.createClass({
   render: function() {
     var {count} = this.props;
     return (
-      <span className="link-button">
-        <i className="fa fa-hart"/>
-        {count>0 ? <span className="link-count">{count}</span>
-        : null}
+      <span className="like-button">
+        <i className="fa fa-heart"/>
+        {count > 0 ?
+         <span className="like-count">{count}</span>
+         : null}
       </span>
     );
   }
@@ -130,9 +130,20 @@ var testTweet = {
   likes: 5,
   retweets: 2,
   timestamp: "2016-07-30 21:24:37"
-
 };
 
-ReactDOM.render(<Tweet tweet={testTweet}/>,
+var clayTweet = {
+  message: "I need to disc more",
+  gravatar: "40017ecb829b33e09bd6ad4503f45308",
+  author: {
+    handle: "cdagler",
+    name: "Clay Dagler",
+  },
+  likes: 73,
+  retweets: 4,
+  timestamp: "2016-10-25",
+};
+
+ReactDOM.render(<Tweet tweet={clayTweet}/>,
   document.getElementById('root')
 );
